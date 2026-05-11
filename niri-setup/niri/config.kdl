@@ -40,7 +40,7 @@ input {
         // drag false
         // drag-lock
         // natural-scroll
-        // accel-speed 0.2
+        accel-speed 0.9
         // accel-profile "flat"
         // scroll-method "two-finger"
         // disabled-on-external-mouse
@@ -49,7 +49,7 @@ input {
     mouse {
         // off
         // natural-scroll
-        // accel-speed 0.2
+        accel-speed 0.9
         // accel-profile "flat"
         // scroll-method "no-scroll"
     }
@@ -57,7 +57,7 @@ input {
     trackpoint {
         // off
         // natural-scroll
-        // accel-speed 0.2
+        accel-speed 0.9
         // accel-profile "flat"
         // scroll-method "on-button-down"
         // scroll-button 273
@@ -117,6 +117,23 @@ output "eDP-1" {
     // automatically.
     position x=1080 y=0
 }
+
+// ── TEMA GTK / DARK MODE ──────────────────────────────────
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "adw-gtk3-dark"
+//spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "adwaita-dark"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
+
+// ── TEMA QT ───────────────────────────────────────────────
+spawn-at-startup "sh" "-c" "QT_QPA_PLATFORMTHEME=qt6ct"
+
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
+
+//swaybg
+
+spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/barbosa-arch/Pictures/wallpapers/night.jpg"
+
+//spawn-at-startup "sh" "-c" "~/code-projects/clean-clipboard.sh"
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
@@ -375,11 +392,18 @@ binds {
 
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+R hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+B {spawn "brave"; }
     Mod+E {spawn "thunar"; }
+
+    // BLOQUEAR A TELA 
+    Mod+L {spawn "swaylock"; }
+
+    // area de transferencia
+    Ctrl+Mod+V { spawn "sh" "-c" "cliphist list | rofi -dmenu | cliphist decode | wl-copy"; }
+
 
 
 
@@ -428,7 +452,7 @@ binds {
     Mod+H     { focus-column-left; }
     Mod+J     { focus-window-down; }
     Mod+K     { focus-window-up; }
-    Mod+L     { focus-column-right; }
+    //Mod+L     { focus-column-right; }
 
     Mod+Ctrl+Left  { move-column-left; }
     Mod+Ctrl+Down  { move-window-down; }
