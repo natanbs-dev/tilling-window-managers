@@ -1,3 +1,0 @@
-## SETAR ALTA VARIEDADE DE TEMAS NO TERMINAL
-
-kitten themes
