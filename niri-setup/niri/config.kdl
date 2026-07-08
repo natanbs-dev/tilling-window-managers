@@ -123,15 +123,22 @@ spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "ad
 //spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "adwaita-dark"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
 
+
 // ── TEMA QT ───────────────────────────────────────────────
-spawn-at-startup "sh" "-c" "QT_QPA_PLATFORMTHEME=qt6ct"
+//spawn-at-startup "sh" "-c" "QT_QPA_PLATFORMTHEME=qt6ct"
+
+// config.kdl
+environment {
+    QT_QPA_PLATFORMTHEME "qt6ct"
+}
 
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 
 //swaybg
 
-spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/barbosa-arch/Pictures/wallpapers/night.jpg"
+spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/bonham-r/Pictures/wallpapers/sun-earth-stars-space-digital-art-4k-wallpaper-uhdpaper.com-397@3@b.jpg"
+
 
 //spawn-at-startup "sh" "-c" "~/code-projects/clean-clipboard.sh"
 
@@ -298,6 +305,7 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
+
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -375,6 +383,8 @@ window-rule {
 }
 
 binds {
+
+
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
     // like wev.
@@ -388,14 +398,14 @@ binds {
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
     Mod+Shift+Slash { show-hotkey-overlay; }
-  
 
+  
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+R hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
-    Mod+B {spawn "brave"; }
+    Mod+B {spawn "brave-origin"; }
     Mod+E {spawn "thunar"; }
 
     // BLOQUEAR A TELA 
@@ -424,7 +434,12 @@ binds {
     //controladores de audio 
     F2 { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
     F3 { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
-    
+    F5 { spawn "playerctl" "play-pause"; }
+    F6 { spawn "playerctl" "previous"; }
+    F8 { spawn "playerctl" "next"; }
+
+
+
     // Example media keys mapping using playerctl.
     // This will work with any MPRIS-enabled media player.
     XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
