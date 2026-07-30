@@ -1,0 +1,30 @@
+# Tela escura com cor sólida
+color=000000
+
+# Ou com imagem de fundo
+image=~/Pictures/wallpapers/dark.png
+scaling=fill
+
+# Visual
+indicator-radius=100
+indicator-thickness=7
+ring-color=7fc8ff
+key-hl-color=ffffff
+separator-color=00000000
+
+# Texto
+text-color=ffffff
+text-caps-lock-color=ffffff
+
+# Anel de erro
+ring-wrong-color=ff0000
+text-wrong-color=ff0000
+
+# Anel OK após digitar senha certa
+ring-ver-color=00ff00
+
+# Mostrar falhas
+show-failed-attempts
+
+# Sem fork (recomendado no Niri)
+daemonize
