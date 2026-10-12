@@ -34,7 +34,7 @@ hl.monitor({
 
 -- Set programs that you use
 local terminal = "kitty"
-local fileManager = "nautilus"
+local fileManager = "thunar"
 local menu = "fuzzel"
 local browser = "brave-origin"
 -------------------
@@ -64,6 +64,12 @@ end)
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
+
+-- Qt6 / Qt5 - necessário para qt6ct não dar erro de QT_QPA_PLATFORMTHEME
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+hl.env("QT_QPA_PLATFORM", "wayland;xcb")
+hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
+hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 
 -----------------------
 ----- PERMISSIONS -----
@@ -222,7 +228,7 @@ hl.config({
 hl.config({
 	input = {
 		kb_layout = "br",
-		kb_variant = "abnt2",
+		kb_variant = "",
 		kb_model = "",
 		kb_options = "",
 		kb_rules = "",
@@ -274,8 +280,8 @@ hl.env("HYPRSHOT_DIR", os.getenv("HOME") .. "/Pictures/")
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("bash ~/.config/hypr/scripts/wallpaper.sh"))
 
 -- CONTROLE DE AUDIO
-hl.bind(mainMod .. " + F2", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"))
-hl.bind(mainMod .. " + F3", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"))
+hl.bind("F2", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"))
+hl.bind(" F3", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"))
 
 -- Lock screen
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
@@ -305,6 +311,11 @@ hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
+
+-- Resize active window with mainMod + SHIFT + arrow keys
+local resizeStep = 40
+hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.resize({ x = resizeStep, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.resize({ x = -resizeStep, y = 0, relative = true }), { repeating = true })
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
